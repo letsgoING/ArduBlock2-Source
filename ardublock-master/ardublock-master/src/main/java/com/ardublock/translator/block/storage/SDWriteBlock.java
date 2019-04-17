@@ -15,20 +15,27 @@ public class SDWriteBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
+		String VarMarker = "><"; //split marker used in GlueBlock
+		
 		String fileVar  = getRequiredTranslatorBlockAtSocket(0).toCode();
 		fileVar = fileVar.replaceAll("\"", "");
 		
 		String fileData = getRequiredTranslatorBlockAtSocket(1).toCode();
 		String newLine  = getRequiredTranslatorBlockAtSocket(2).toCode().replaceAll("\\s*_.new\\b\\s*", "");
+		String ret = "";
 		
-		String ret;
+		String[] stringParts = fileData.split(VarMarker);
+		
+		for(int i = 0; i < stringParts.length; i += 1){
+			if(stringParts[i].endsWith("\"")){
+				stringParts[i] = stringParts[i].substring(0,stringParts[i].length() - 1) + " \"";// SPACE added at the end of every part
+			}
+			ret += fileVar+".print("+stringParts[i]+");\n"; 
+		}
 		
 		if(newLine.equals("true")|| newLine.equals("HIGH")){
 			
-			ret = fileVar+".println("+fileData+");";
-		}
-		else{
-			ret = fileVar+".print("+fileData+");";
+			ret = fileVar+".println();";
 		}
         
 		return  ret ;

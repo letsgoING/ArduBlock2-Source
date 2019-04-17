@@ -15,7 +15,9 @@ public class SerialReadBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
-		//translator.addSetupCommand("Serial.begin(9600);");
+		if(!translator.containsSetupCommand("Serial.begin")){
+			translator.addSetupCommand("Serial.begin(9600);");
+		}
 		
 		String ret = "Serial.read()";
 		

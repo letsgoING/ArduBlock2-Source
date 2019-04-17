@@ -212,10 +212,10 @@
 				<text>invoke subroutine</text>
 			</description>
 		</BlockGenus>
-		<BlockGenus name="subroutine_var" kind="command" color="200 220 0" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine_varret" kind="command" color="200 220 0" initlabel="bg.subroutine_varret" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
-					<DefaultArg genus-name="local_variable_number" label="iternalVar" />
+					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
 				</BlockConnector>
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 				<BlockConnector label="bc.sub_return" connector-type="number" connector-kind="socket" position-type="single">
@@ -223,9 +223,24 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine-ref_var" kind="data" color="200 220 0" initlabel="bg.subroutine_var" editable-label="yes">
+		<BlockGenus name="subroutine-ref_varret" kind="data" color="200 220 0" initlabel="bg.subroutine_varret" editable-label="yes">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" />
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.transmit">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="subroutine_var" kind="command" color="200 220 0" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
+					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
+				</BlockConnector>
+				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="subroutine-ref_var" kind="command" color="200 220 0" initlabel="bg.subroutine_var" editable-label="yes">
+			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.transmit">
 					<DefaultArg genus-name="number" label="0" />
 				</BlockConnector>
@@ -766,6 +781,51 @@
 		    <BlockConnector label="1" connector-type="number" connector-kind="plug" position-type="single"/>
 		  </BlockConnectors>
 		</BlockGenus>		
+		<BlockGenus name="dht_sensor_setup" kind="command" color="44 165 226" initlabel="bg.dht_sensor_setup">
+			<description>
+				<text>
+				</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+					connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+					connector-kind="socket" label="bc.dhtType">
+					<DefaultArg genus-name="number" label="11" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="dht_sensor_read_temp" kind="data"	color="44 165 226" initlabel="bg.dht_sensor_read_temp" editable-label="yes" is-label-value="yes">
+			<description>
+				<text></text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+					connector-kind="plug" position-type="mirror" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="dht_sensor_read_humid" kind="data"	color="44 165 226" initlabel="bg.dht_sensor_read_humid" editable-label="yes" is-label-value="yes">
+			<description>
+				<text></text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+					connector-kind="plug" position-type="mirror" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="dht_sensor_calc_index" kind="data" color="44 165 226" initlabel="bg.dht_sensor_calc_index">
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="plug"  />
+				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.DHTtemp">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.DHThumid">
+					<DefaultArg genus-name="number" label="3" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		
 		<!--****************** Logical Operators *************** -->
 		<BlockGenus name="greater" kind="function" color="255 20 147" initlabel="bg.greater">
@@ -1592,6 +1652,27 @@
 	        <BlockConnector connector-type="string" connector-kind="plug" position-type="mirror" />
 	      </BlockConnectors>
 	    </BlockGenus>
+		<BlockGenus name="variable_file" kind="data" initlabel="bg.variable_file" editable-label="yes" is-label-value="yes" color="204 0 102">
+	      <description>
+	        <text>
+	          Variable File
+	        </text>
+	      </description>
+	      <BlockConnectors>
+	        <BlockConnector connector-type="string-list" connector-kind="plug" position-type="mirror" />
+	      </BlockConnectors>
+	    </BlockGenus>
+		<BlockGenus name="local_variable_file" kind="data" initlabel="bg.local_variable_file" editable-label="yes" is-label-value="yes" color="174 0 72">
+	      <description>
+	        <text>
+	          Variable File
+	        </text>
+	      </description>
+	      <BlockConnectors>
+	        <BlockConnector connector-type="string-list" connector-kind="plug" position-type="mirror" />
+	      </BlockConnectors>
+	    </BlockGenus>
+		
 		<!-- ******************** Arrays *************** -->
 		<BlockGenus name="create_char_array" kind="command" color="200 0 0" initlabel="bg.create_char_array">
 	      <description>
@@ -1750,19 +1831,6 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="serial_print_baud" kind="command" color="165 42 42" initlabel="bg.serial_print_baud">
-			<description>
-				<text>send message via Serial port</text>
-			</description>
-			<BlockConnectors>
-				<BlockConnector connector-type="string" connector-kind="socket" label="bc.message">
-					<DefaultArg genus-name="string" label="Nachricht" />
-				</BlockConnector>
-				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.ln">
-					<DefaultArg genus-name="true" label="true" />
-				</BlockConnector>
-			</BlockConnectors>
-		</BlockGenus>
 		<BlockGenus name="serial_print" kind="command" color="165 42 42" initlabel="bg.serial_print">
 			<description>
 				<text>send message via Serial port</text>
@@ -1792,10 +1860,10 @@
 					</description>
 					<BlockConnectors>
 						<BlockConnector connector-type="number"	connector-kind="socket" label="bc.rx_pin_number">
-							<DefaultArg genus-name="number" label="2" />
+							<DefaultArg genus-name="number" label="10" />
 						</BlockConnector>
 						<BlockConnector connector-type="number"	connector-kind="socket" label="bc.tx_pin_number">
-							<DefaultArg genus-name="number" label="3" />
+							<DefaultArg genus-name="number" label="11" />
 						</BlockConnector>
 						<BlockConnector connector-type="string" connector-kind="socket" label="bc.message">
 							<DefaultArg genus-name="string" label="Nachricht" />
@@ -1811,13 +1879,13 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.rx_pin_number">
-					<DefaultArg genus-name="number" label="2" />
+					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.tx_pin_number">
-					<DefaultArg genus-name="number" label="3" />
+					<DefaultArg genus-name="number" label="11" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.baudrate">
-					<DefaultArg genus-name="number" label="9600" />
+					<DefaultArg genus-name="number" label="4800" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>		
@@ -1825,10 +1893,10 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="poly" connector-kind="plug"  />
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.rx_pin_number">
-					<DefaultArg genus-name="number" label="2" />
+					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.tx_pin_number">
-					<DefaultArg genus-name="number" label="3" />
+					<DefaultArg genus-name="number" label="11" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -1836,10 +1904,10 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.rx_pin_number">
-					<DefaultArg genus-name="number" label="2" />
+					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.tx_pin_number">
-					<DefaultArg genus-name="number" label="3" />
+					<DefaultArg genus-name="number" label="11" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -1890,6 +1958,114 @@
 				<BlockConnector label="" connector-kind="plug" connector-type="string" position-type="mirror" />
 				<BlockConnector label="" connector-kind="socket" connector-type="string" position-type="bottom" />
 				<BlockConnector label="" connector-kind="socket" connector-type="string" position-type="bottom" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="tele_set_frame" kind="command" color="165 42 42" initlabel="bg.tele_set_frame">
+			<description>
+				<text>write Data to telegram frame</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sendAddress">
+					<DefaultArg genus-name="number" label="1" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.recAddress">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
+				<BlockConnector connector-type="poly" connector-kind="socket" label="bc.command">
+					<DefaultArg genus-name="char" label="@" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.dataLength">
+					<DefaultArg genus-name="number" label="3" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.payload">
+					<DefaultArg genus-name="variable_string" label="Nutzdaten_Puffer_Variable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sendBuffer">
+					<DefaultArg genus-name="variable_string" label="Sendedaten_Puffer_Variable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="tele_read_frame" kind="command" color="165 42 42" initlabel="tele_read_frame">
+			<description>
+				<text>read telegram data from Serial</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="poly" connector-kind="socket" label="bc.nextChar"/>
+				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.dataComplete">
+					<DefaultArg genus-name="variable_digital" label="datenKomplettVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.recChars">
+					<DefaultArg genus-name="variable_number" label="empfangeneZeichenVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.recBuffer">
+					<DefaultArg genus-name="variable_string" label="empfangsdatenPufferVariable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="tele_read_data_frame" kind="command" color="165 42 42" initlabel="tele_read_data_frame">
+			<description>
+				<text>read data from telegram frame</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sendAddress">
+					<DefaultArg genus-name="number" label="1" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.recAddress">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
+				<BlockConnector connector-type="poly" connector-kind="socket" label="bc.command">
+					<DefaultArg genus-name="variable_char" label="befehlVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.payload">
+					<DefaultArg genus-name="variable_string" label="nutzdatenPufferVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.recFrame">
+					<DefaultArg genus-name="variable_string" label="empfangsdatenPufferVariable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="mqtt_set_frame" kind="command" color="165 42 42" initlabel="bg.mqtt_set_frame">
+			<description>
+				<text>write data to MQTT frame</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.topicLength">
+					<DefaultArg genus-name="number" label="1" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.topic">
+					<DefaultArg genus-name="variable_string" label="meinTopic" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.payloadLength">
+					<DefaultArg genus-name="number" label="3" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.payload">
+					<DefaultArg genus-name="variable_string" label="nutzdatenPufferVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sendBuffer">
+					<DefaultArg genus-name="variable_string" label="sendedatenPufferVariable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="mqtt_read_frame" kind="command" color="165 42 42" initlabel="bg.mqtt_read_frame">
+			<description>
+				<text>read data from MQTT frame</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.topicLength">
+					<DefaultArg genus-name="variable_number" label="längeTopicVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.topic">
+					<DefaultArg genus-name="variable_string" label="topicVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.payloadLength">
+					<DefaultArg genus-name="variable_number" label="längeNutzdatenVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.payload">
+					<DefaultArg genus-name="variable_string" label="nutzdatenPufferVariable" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.recBuffer">
+					<DefaultArg genus-name="variable_string" label="empfangsdatenPufferVariable" />
+				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
 		
@@ -1963,14 +2139,13 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="sd_open" kind="data" color="0 32 96" initlabel="bg.sd_open">
+		<BlockGenus name="sd_open" kind="command" color="0 32 96" initlabel="bg.sd_open">
 			<description>
 				<text>Open file on SD card</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="boolean" connector-kind="plug" />
-				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdFileVar">
-					<DefaultArg genus-name="string" label="datei_Variable" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
 				</BlockConnector>
 				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdFileName">
 					<DefaultArg genus-name="string" label="daten.txt" />
@@ -1985,8 +2160,8 @@
 				<text>Close file on SD card</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdFileVar">
-					<DefaultArg genus-name="string" label="datei.txt" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -1995,8 +2170,8 @@
 				<text>Write to SD card</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdFileVar">
-					<DefaultArg genus-name="string" label="datei_Variable" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
 				</BlockConnector>
 				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdWriteData">
 					<DefaultArg genus-name="string" label="Daten" />
@@ -2011,9 +2186,31 @@
 				<text>Read from SD card</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="string" connector-kind="plug" />
-				<BlockConnector connector-type="string" connector-kind="socket" label="bc.sdFileVar">
-					<DefaultArg genus-name="string" label="datei_Variable" />
+				<BlockConnector connector-type="poly" connector-kind="plug" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="sd_data_available" kind="data" color="0 32 96" initlabel="bg.sd_data_available">
+			<description>
+				<text>Data available on SD-Card</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="plug" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="sd_file_available" kind="data" color="0 32 96" initlabel="bg.sd_file_available">
+			<description>
+				<text>File is available</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="boolean" connector-kind="plug" />
+				<BlockConnector connector-type="string-list" connector-kind="socket" label="bc.sdFileVar">
+					<DefaultArg genus-name="local_variable_file" label="datei_Variable" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -2188,6 +2385,8 @@
 				<BlockGenusMember>subroutine-ref</BlockGenusMember>
 				<BlockGenusMember>subroutine_var</BlockGenusMember>
 				<BlockGenusMember>subroutine-ref_var</BlockGenusMember>
+				<BlockGenusMember>subroutine_varret</BlockGenusMember>
+				<BlockGenusMember>subroutine-ref_varret</BlockGenusMember>
 				
 				<BlockGenusMember>interrupt</BlockGenusMember>
 			</BlockDrawer>
@@ -2235,6 +2434,11 @@
 				<BlockGenusMember>LGI_Qtouch_Button1_getOffset</BlockGenusMember>
 				<BlockGenusMember>LGI_Qtouch_Button1_getRaw</BlockGenusMember>
 				<BlockGenusMember>LGI_Qtouch_Button1_isTouched</BlockGenusMember>
+				
+				<BlockGenusMember>dht_sensor_setup</BlockGenusMember>
+				<BlockGenusMember>dht_sensor_read_temp</BlockGenusMember>
+				<BlockGenusMember>dht_sensor_read_humid</BlockGenusMember>
+				<BlockGenusMember>dht_sensor_calc_index</BlockGenusMember>
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="255 20 147" name="bd.logic" type="default">
@@ -2387,6 +2591,9 @@
 				<BlockGenusMember>variable_string</BlockGenusMember>
 				<BlockGenusMember>local_variable_string</BlockGenusMember>
 				<BlockGenusMember>string</BlockGenusMember>
+				
+				<BlockGenusMember>variable_file</BlockGenusMember>
+				<BlockGenusMember>local_variable_file</BlockGenusMember>
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="200 0 0" name="bd.array" type="custom">							
@@ -2403,7 +2610,8 @@
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="165 42 42" name="bd.communication" type="default">
-				<BlockGenusMember>serial_print_baud</BlockGenusMember>
+				<BlockGenusMember>serial_print</BlockGenusMember>
+				<BlockGenusMember>soft_serial_print</BlockGenusMember>
 
 				<BlockGenusMember>glue_digital</BlockGenusMember>
 				<BlockGenusMember>glue_number</BlockGenusMember>
@@ -2427,6 +2635,13 @@
 				<BlockGenusMember>glue_number</BlockGenusMember>
 				<BlockGenusMember>glue_char</BlockGenusMember>
 				<BlockGenusMember>glue_string</BlockGenusMember>
+				
+				<BlockGenusMember>tele_set_frame</BlockGenusMember>
+				<BlockGenusMember>tele_read_frame</BlockGenusMember>
+				<BlockGenusMember>tele_read_data_frame</BlockGenusMember>
+				
+				<BlockGenusMember>mqtt_set_frame</BlockGenusMember>
+				<BlockGenusMember>mqtt_read_frame</BlockGenusMember>
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="0 32 96" name="bd.storage" type="custom">
@@ -2441,6 +2656,8 @@
 				<BlockGenusMember>sd_close</BlockGenusMember>
 				<BlockGenusMember>sd_write</BlockGenusMember>
 				<BlockGenusMember>sd_read</BlockGenusMember>
+				<BlockGenusMember>sd_data_available</BlockGenusMember>
+				<BlockGenusMember>sd_file_available</BlockGenusMember>
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="0 176 80" name="bd.code" type="custom">

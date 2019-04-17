@@ -17,7 +17,7 @@ public class SDReadBlock extends TranslatorBlock
 	{
 		String fileVar  = getRequiredTranslatorBlockAtSocket(0).toCode();
 		fileVar = fileVar.replaceAll("\"", "");
-		String ret = fileVar+".read();";
+		String ret = fileVar+".read()";
 		
 		return  ret ;
 	}

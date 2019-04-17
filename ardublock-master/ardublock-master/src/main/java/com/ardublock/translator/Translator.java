@@ -178,6 +178,16 @@ public class Translator
 		}
 	}
 	
+	public boolean containsSetupCommand(String command)
+	{
+		for(String listCommand : setupCommand){
+			if(listCommand.contains(command)){
+				return true;
+			}
+		}
+		return false;	
+	}
+	
 	public void addSetupCommandForced(String command)
 	{
 		setupCommand.add(command);

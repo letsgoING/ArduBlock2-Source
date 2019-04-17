@@ -17,6 +17,11 @@ public class SerialEventBlock extends TranslatorBlock
 	{
 		String subroutineName = label.trim();
 		String ret;
+		
+		if(!translator.containsSetupCommand("Serial.begin")){
+			translator.addSetupCommand("Serial.begin(9600);");
+		}
+		
 		ret = "void " + subroutineName + "()\n{\n";
 		TranslatorBlock translatorBlock = getTranslatorBlockAtSocket(0);
 		while (translatorBlock != null)

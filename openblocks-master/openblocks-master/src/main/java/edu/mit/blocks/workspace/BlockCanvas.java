@@ -578,7 +578,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         }
 
         public void mouseClicked(MouseEvent e) {
-            if (SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
+        	if (SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
                 //pop up context menu
                 PopupMenu popup = ContextMenu.getContextMenuFor(BlockCanvas.this);
                 this.add(popup);

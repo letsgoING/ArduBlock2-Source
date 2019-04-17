@@ -32,7 +32,7 @@ public class SetterVariableStringBlock extends TranslatorBlock
 		String value = tb_Value.toCode().replaceAll(regex, "");
 		
 		if (!(tb_Name instanceof VariableStringBlock) && !(tb_Name instanceof LocalVariableStringBlock)  && !(tb_Name instanceof ConstantStringBlock)) {
-		    throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
+		    throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.string_var_slot"));
 		}
 		
 		//LOCAL VAR

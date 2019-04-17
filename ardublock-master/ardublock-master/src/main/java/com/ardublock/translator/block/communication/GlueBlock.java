@@ -28,4 +28,3 @@ public class GlueBlock extends TranslatorBlock
 		return  ret + tB2.toCode().replaceAll("\\s*_.new\\b\\s*", "") + " ";
 	}
 }
-

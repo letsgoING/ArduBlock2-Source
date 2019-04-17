@@ -35,12 +35,12 @@ public class SetterNumberArrayBlock extends TranslatorBlock
 		if (!(tb_Name instanceof VariableNumberBlock)&& !(tb_Name instanceof LocalVariableNumberBlock)) {
 		      throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
 		    }
-		if (!(tb_Pos instanceof VariableNumberBlock) && !(tb_Pos instanceof LocalVariableNumberBlock) && !(tb_Pos instanceof NumberBlock)) {
+		/*if (!(tb_Pos instanceof VariableNumberBlock) && !(tb_Pos instanceof LocalVariableNumberBlock) && !(tb_Pos instanceof NumberBlock)) {
 		      throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
 		    }
 		if (!(tb_Value instanceof VariableNumberBlock) && !(tb_Value instanceof LocalVariableNumberBlock) && !(tb_Value instanceof NumberBlock)) {
 		      throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
-		    }
+		    }*/
 		
 		String ret = variableName+"["+arrayPos+"]";
 		ret = ret + " = " + value + ";\n";

@@ -18,9 +18,16 @@ public class SoftSerialReadBlock extends TranslatorBlock
 		/**
 		 * DO NOT add tab in code any more, we'll use arduino to format code, or the code will duplicated. 
 		 */		
+		translator.addHeaderFile("SoftwareSerial.h");
+		
 		TranslatorBlock tB1 = this.getRequiredTranslatorBlockAtSocket(0);//Pin Rx
 		TranslatorBlock tB2 = this.getRequiredTranslatorBlockAtSocket(1);//Pin Tx
 		String SerialNumber = tB1.toCode().replaceAll("\\s*_.new\\b\\s*", "") + tB2.toCode().replaceAll("\\s*_.new\\b\\s*", "");
+		
+		if(!translator.containsSetupCommand("softSerial"+SerialNumber+".begin")){
+			translator.addSetupCommand("softSerial"+SerialNumber+".begin(4800);");
+			translator.addDefinitionCommand("SoftwareSerial softSerial"+SerialNumber+"(" + tB1.toCode().replaceAll("\\s*_.new\\b\\s*", "") + ", "+ tB2.toCode().replaceAll("\\s*_.new\\b\\s*", "") +");\n");
+		}
 		
 		String ret = "softSerial"+SerialNumber+".read()";
 		

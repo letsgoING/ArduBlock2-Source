@@ -1601,8 +1601,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 		cloneThis(this);
 		workspace.notifyListeners(new WorkspaceEvent(workspace, this
 				.getParentWidget(), this.getBlockID(),
-				WorkspaceEvent.BLOCK_CLONED, true));
-				
+				WorkspaceEvent.BLOCK_CLONED, true));	
 	}
 
 	private RenderableBlock cloneThis(RenderableBlock rb)
@@ -1667,6 +1666,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     	}
     	
     	newRb.setLocation(oriLocation.x+(int)(NEARBY_RADIUS),oriLocation.y+(int)(NEARBY_RADIUS));
+    	newRb.setZoomLevel(workspace.getCurrentWorkspaceZoom()); //added letsgoING
     	newRb.moveConnectedBlocks();
     	parent.addBlock(newRb);
     	newRb.linkedDefArgsBefore = true;
@@ -1706,8 +1706,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 				// TODO: djwendel - this is a patch, but the root of the problem
 				// needs to be found and fixed!!
 				if (rb == null) {
-					System.out.println("Block doesn't exist yet: "
-							+ socket.getBlockID());
+					//System.out.println("Block doesn't exist yet: "+ socket.getBlockID());
 					continue;
 				}
 
@@ -1731,27 +1730,25 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 			}
 		}
 	}
-
-	private void startDragging(RenderableBlock renderable,
-			WorkspaceWidget widget) {
+	
+	private void startDragging(RenderableBlock renderable, WorkspaceWidget widget) {	
 		renderable.pickedUp = true;
 		renderable.lastDragWidget = widget;
+
 		if (renderable.hasComment()) {
 			renderable.comment.setConstrainComment(false);
 		}
 		Component oldParent = renderable.getParent();
 		Workspace workspace = renderable.getWorkspace();
+
 		workspace.addToBlockLayer(renderable);
-		renderable.setLocation(SwingUtilities.convertPoint(oldParent,
-				renderable.getLocation(), workspace));
+		renderable.setLocation(SwingUtilities.convertPoint(oldParent,renderable.getLocation(), workspace));
 		renderable.setHighlightParent(workspace);
-		for (BlockConnector socket : BlockLinkChecker
-				.getSocketEquivalents(workspace.getEnv().getBlock(
-						renderable.blockID))) {
+
+		for (BlockConnector socket : BlockLinkChecker.getSocketEquivalents(workspace.getEnv().getBlock(renderable.blockID))) {
 			if (socket.hasBlock()) {
-				startDragging(
-						workspace.getEnv().getRenderableBlock(
-								socket.getBlockID()), widget);
+				startDragging(workspace.getEnv().getRenderableBlock(socket.getBlockID()), widget);
+				
 			}
 		}
 	}
@@ -1910,15 +1907,20 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 			}
 		}
 		pickedUp = false;
-		if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)
-				|| e.isControlDown()) {
-			// add context menu at right click location to provide functionality
-			// for adding new comments and removing comments
-			PopupMenu popup = ContextMenu.getContextMenuFor(this);
-			add(popup);
-			popup.show(this, e.getX(), e.getY());
+		if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
+			if ( SwingUtilities.isRightMouseButton(e) &  e.isControlDown()){// added by letsgoING
+				//System.out.println("CLONING");
+				this.cloneMe();
+			}
+			else{
+				// add context menu at right click location to provide functionality
+				// for adding new comments and removing comments
+				PopupMenu popup = ContextMenu.getContextMenuFor(this);
+				add(popup);
+				popup.show(this, e.getX(), e.getY());
+			}
+			workspace.getMiniMap().repaint();
 		}
-		workspace.getMiniMap().repaint();
 	}
 
 	public void mouseDragged(MouseEvent e) {

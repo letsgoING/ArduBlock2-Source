@@ -20,7 +20,7 @@ public class LocalVariableStringBlock extends TranslatorBlock
 		if (internalVariableName == null )
 		{
 			internalVariableName = translator.buildVariableName(label);		
-			newInternalName = internalVariableName + newMarker;; //add the "new" Tag for varDeclaration
+			newInternalName = internalVariableName + newMarker; //add the "new" Tag for varDeclaration
 			translator.addNumberVariable(internalVariableName, (newInternalName)); 
 		}
 		return codePrefix + newInternalName + codeSuffix;

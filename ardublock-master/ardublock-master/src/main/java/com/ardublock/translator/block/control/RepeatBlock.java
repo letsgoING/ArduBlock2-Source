@@ -24,7 +24,6 @@ public class RepeatBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
-
 		String suffix = "";
 		String newMarker = "_.new";
 		String regex = "\\s*"+newMarker+"\\b\\s*";
@@ -42,9 +41,9 @@ public class RepeatBlock extends TranslatorBlock
 			throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
 		}
 		
-		if (!(tb_Value instanceof NumberBlock) && !(tb_Value instanceof VariableNumberBlock)) {
+		/*if (!(tb_Value instanceof NumberBlock) && !(tb_Value instanceof VariableNumberBlock)) {
 			throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_slot"));
-		}
+		}*/
 		
 		//LOCAL VAR
 		if ((tb_Name instanceof LocalVariableNumberBlock)) {

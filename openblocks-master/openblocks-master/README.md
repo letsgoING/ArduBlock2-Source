@@ -46,8 +46,12 @@ Contact: 	info@letsgoing.de
 Source:		github.com/letsgoing
 
 added Option to change Menu
-Changes:
+changes:
 - in loadBlockDrawerSets() added drawerType param + filter (PageDrawerLoadingUtils.java Line 185 + 201 + 211-214 + 232)
 - in loadWorkspaceFrom() added drawerType param (Workspace.java line 836 + 843 + 849 + 855)
 - in loadWorkspaceFrom() added drawerType param (WorkspaceController.java line 415 + 433 + 460 + 502)
 - in loadProject() added drawerType param and moved workspace.loadWorkspaceFrom() in if/else (WorkspaceController.java line 499 + 516 + 519)
+other changes:
+- in mouseReleased() added clone functionality by rightClick + CTRL (RenderableBlock.java line 1917 - 1921)
+- in Page() removed "add collapse Button" (Page.java line 176)
+- in paintComponent() removed "paint label" (Page.java line 1150 - 1166) 

@@ -202,7 +202,7 @@ public class PageDrawerLoadingUtils {
                         Color buttonColor = Color.blue;
                         StringTokenizer col;
                         nameMatcher = attrExtractor.matcher(drawerNode.getAttributes().getNamedItem("name").toString());
-        
+
                         if (nameMatcher.find()) {//will be true
                             drawerName = nameMatcher.group(1);
                         }
@@ -226,7 +226,7 @@ public class PageDrawerLoadingUtils {
                                 }
                             }
                         }
-	                        
+
 	                    if(drawerType.equals(type)){  //added by letsgoING
 	                    	
 	                        manager.addStaticDrawer(drawerName, buttonColor);
@@ -247,7 +247,7 @@ public class PageDrawerLoadingUtils {
 	                                drawerRBs.add(new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID()));
 	                            }
 	                        }
-	                        manager.addStaticBlocks(drawerRBs, drawerName);
+	                        manager.addStaticBlocks(drawerRBs, drawerName); 
 	                    }
                     }
                 }

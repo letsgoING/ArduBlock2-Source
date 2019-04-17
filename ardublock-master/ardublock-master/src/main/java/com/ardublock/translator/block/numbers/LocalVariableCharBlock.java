@@ -13,14 +13,15 @@ public class LocalVariableCharBlock extends TranslatorBlock
 	@Override
 	public String toCode()
 	{	
+		String newMarker = "_.new";
 		String internalVariableName = translator.getNumberVariable(translator.buildVariableName(label));
 		String newInternalName = internalVariableName;
 				
 		if (internalVariableName == null )
 		{
 			internalVariableName = translator.buildVariableName(label);		
-			newInternalName = internalVariableName+"_new"; //add the "new" Tag for varDeclaration
-			translator.addNumberVariable(internalVariableName, (newInternalName)); 
+			newInternalName = internalVariableName + newMarker; //add the "new" Tag for varDeclaration
+			translator.addNumberVariable(internalVariableName, (newInternalName));
 		}
 		return codePrefix + newInternalName + codeSuffix;
 	}

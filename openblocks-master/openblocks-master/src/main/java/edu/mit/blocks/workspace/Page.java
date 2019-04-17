@@ -86,6 +86,7 @@ import edu.mit.blocks.renderable.RenderableBlock;
  * an explorer that affects the display of the page. When an explorer event
  * happens the page changes its display accordingly
  */
+@SuppressWarnings("unused")
 public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemento {
 
     /** The workspace in use */
@@ -172,7 +173,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.fullview = inFullview;
         this.collapse = new CollapseButton(inFullview, name);
         if (isCollapsible) {
-            this.pageJComponent.add(collapse);
+            //this.pageJComponent.add(collapse); //removed by letsgoING TODO: remove all functionality arround
         }
         this.pageJComponent.setFullView(inFullview);
     }
@@ -240,6 +241,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.pageJComponent.removeAll();
         Page.zoom = 1.0;
     }
+
 
     /**
      * Destructs this Page by setting its set of blocks to empty.
@@ -830,10 +832,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         public String id;
         public int width;
         public Color color;
-        @SuppressWarnings("unused")
-		public boolean fullview;
-        @SuppressWarnings("unused")
-		public Map<Long, Object> blocks = new HashMap<Long, Object>();
+        public boolean fullview;
+        public Map<Long, Object> blocks = new HashMap<Long, Object>();
         public Map<Long, Object> renderableBlocks = new HashMap<Long, Object>();
     }
 
@@ -1074,8 +1074,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             }
         }
 
-        @SuppressWarnings("unused")
-		public void mouseDragged(MouseEvent e) {
+        public void mouseDragged(MouseEvent e) {
         }
 
         @Override
@@ -1086,8 +1085,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             }
         }
 
-        @SuppressWarnings("unused")
-		public void mouseMoved(MouseEvent e) {
+        public void mouseMoved(MouseEvent e) {
         }
 
         @Override
@@ -1117,9 +1115,10 @@ class PageJComponent extends JLayeredPane implements RBParent {
     private static final long serialVersionUID = 83982193213L;
     private static final Integer BLOCK_LAYER = new Integer(1);
     private static final Integer HIGHLIGHT_LAYER = new Integer(0);
-    private static final int IMAGE_WIDTH = 60;
+    //private static final int IMAGE_WIDTH = 60;
     private Image image = null;
-    private boolean fullview = true;
+    @SuppressWarnings("unused")
+	private boolean fullview = true;
 
     public void setFullView(boolean isFullView) {
         this.fullview = isFullView;
@@ -1138,7 +1137,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
      */
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+        //Graphics2D g2 = (Graphics2D) g;
         //paint page
         super.paintComponent(g);
         //set label color
@@ -1149,7 +1148,8 @@ class PageJComponent extends JLayeredPane implements RBParent {
         }
         
         //paint label at correct position
-        if (fullview) {
+        // removed by letsgoING
+        /*if (fullview) { 
             int xpos = (int) (this.getWidth() * 0.5 - g.getFontMetrics().getStringBounds(this.getName(), g).getCenterX());
             g.drawString(this.getName(), xpos, getHeight() / 2);
             g.drawString(this.getName(), xpos, getHeight() / 4);
@@ -1163,7 +1163,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
             g.drawImage(this.getImage(), imageX, getHeight() / 4 + 5, imageWidth, imageWidth, null);
             g.drawImage(this.getImage(), imageX, getHeight() * 3 / 4 + 5, imageWidth, imageWidth, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-        }
+        }*/
     }
 
     //////////////////////////////////

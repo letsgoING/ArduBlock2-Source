@@ -83,8 +83,9 @@ Source:		github.com/letsgoing
 - added LMS-Site Button
 - added expert Mode Butten (Block-Menu-Switch) -> OpenBlocksFrame.java line 273-293
 - added resetExpertState() fcn -> -> OpenBlocksFrame.java line 499-501
-- added subroutine_var Blocks -> GenerateCodeButtonListener.java line 116-131
+- added subroutine_var + subroutine_varret Blocks -> GenerateCodeButtonListener.java line 116-146
 - added interrupt Blocks -> GenerateCodeButtonListener.java line 50 + 133-148 + 211-216
+- added containsSetupCommand method -> Translator.java line 181-189
 - Button Domain via ardublock.properties file
 - removed "ABVAR_" Prefix and variable counter 
 - reorganized ardublock.xml,  ardublock.properties, ardublock_de.properties and packages (menu structure)

@@ -46,7 +46,12 @@ public class SetterVariableCharBlock extends TranslatorBlock
 		else if ((tb_Name instanceof VariableCharBlock) && variableName.contains(newMarker)){
 			variableName = variableName.replaceAll(regex, "");
 			translator.addNumberVariable(variableName, variableName);  //remove the "new" Tag after declaration
-			translator.addDefinitionCommand(dataType + " " + variableName + " = "+ value + suffix +";");
+			
+			if(tb_Value instanceof CharBlock){
+				translator.addDefinitionCommand(dataType + " " + variableName + " = "+ value + suffix +";");
+			}else{
+				translator.addDefinitionCommand(dataType + " " + variableName + " = ' ';");
+			}
 		}
 		//CONSTANT
 		else if ((tb_Name instanceof ConstantCharBlock) ){

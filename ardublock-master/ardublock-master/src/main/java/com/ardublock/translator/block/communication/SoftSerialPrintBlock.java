@@ -18,6 +18,8 @@ public class SoftSerialPrintBlock extends TranslatorBlock
 		/**
 		 * DO NOT add tab in code any more, we'll use arduino to format code, or the code will duplicated. 
 		 */
+		translator.addHeaderFile("SoftwareSerial.h");
+		
 		String VarMarker = "><"; //split marker used in GlueBlock
 		String ret = "";
 		
@@ -28,6 +30,10 @@ public class SoftSerialPrintBlock extends TranslatorBlock
 		TranslatorBlock tB3 = this.getRequiredTranslatorBlockAtSocket(2);//,"softSerial"+tB1.toCode().replaceAll("\\s*_.new\\b\\s*", "")+".print(",");\n");//Code
 		TranslatorBlock tB4 = this.getRequiredTranslatorBlockAtSocket(3);//newLine?
 		
+		if(!translator.containsSetupCommand("softSerial"+SerialNumber+".begin")){
+			translator.addSetupCommand("softSerial"+SerialNumber+".begin(4800);");
+			translator.addDefinitionCommand("SoftwareSerial softSerial"+SerialNumber+"(" + tB1.toCode().replaceAll("\\s*_.new\\b\\s*", "") + ", "+ tB2.toCode().replaceAll("\\s*_.new\\b\\s*", "") +");\n");
+		}
 		
 		String stringInput = tB3.toCode();
 		String[] stringParts = stringInput.split(VarMarker);

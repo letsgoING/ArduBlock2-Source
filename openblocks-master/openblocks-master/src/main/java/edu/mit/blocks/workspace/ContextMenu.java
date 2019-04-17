@@ -5,6 +5,7 @@ import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
+
 import edu.mit.blocks.renderable.RenderableBlock;
 
 /**
@@ -35,6 +36,7 @@ public class ContextMenu extends PopupMenu implements ActionListener {
     //menu items for canvas context menu
     private static ContextMenu canvasMenu = new ContextMenu();
     private static MenuItem arrangeAllBlocks;
+    
     private final static String ARRANGE_ALL_BLOCKS = "ARRANGE_ALL_BLOCKS";
     private static boolean canvasMenuInit = false;
     /** The JComponent that launched the context menu in the first place */
@@ -98,7 +100,7 @@ public class ContextMenu extends PopupMenu implements ActionListener {
         arrangeAllBlocks.addActionListener(canvasMenu);
 
         canvasMenu.add(arrangeAllBlocks);
-
+        
         canvasMenuInit = true;
     }
 

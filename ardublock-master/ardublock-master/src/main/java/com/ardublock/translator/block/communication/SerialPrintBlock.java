@@ -14,14 +14,16 @@ public class SerialPrintBlock extends TranslatorBlock
 
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-	{
-		//translator.addSetupCommand("Serial.begin(9600);");
-		
+	{	
 		String VarMarker = "><"; //split marker used in GlueBlock
 		String ret = "";
 		
 		TranslatorBlock tB1 = this.getRequiredTranslatorBlockAtSocket(0); //Code
 		TranslatorBlock tB2 = this.getRequiredTranslatorBlockAtSocket(1); //newLine?
+		
+		if(!translator.containsSetupCommand("Serial.begin")){
+			translator.addSetupCommand("Serial.begin(9600);");
+		}
 		
 		String stringInput = tB1.toCode();
 		String[] stringParts = stringInput.split(VarMarker);
