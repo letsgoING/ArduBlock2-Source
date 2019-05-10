@@ -53,10 +53,10 @@ import edu.mit.blocks.renderable.RenderableBlock;
  * *************IMPLEMENTATION DETAIL******************
  * 
  * How the FactoryManager implements this UI is implementation
- * dependant.  Right now, it uses the Navigator-Explorer-Canvas deisgn.
+ * dependent.  Right now, it uses the Navigator-Explorer-Canvas design.
  * Clients of the FactoryManager should know nothing about the
  * internal GUIs used to control the interface.  Internally,
- * a Canvas (rahter than an instance of Drawer) is created for every
+ * a Canvas (rather than an instance of Drawer) is created for every
  * "drawer" that the user wishes to add.  But this is an implementation
  * detail that the user should not be bothered with.  All the user should
  * know is that a "drawer" specified by some String object was created.
@@ -75,9 +75,9 @@ import edu.mit.blocks.renderable.RenderableBlock;
  * 
  * Please do not mix this definition with the CSwing Drawer class.
  * A CSwing Drawer is a low-level component that is used
- * in a CSwing Exlorer.  Here, when the documentation refers
- * to drawers, it is NOT refering to the CSwing Drawer.  Rather,
- * when we say "drawer", we are referign to that object that holds blocks.
+ * in a CSwing Explorer.  Here, when the documentation refers
+ * to drawers, it is NOT referring to the CSwing Drawer.  Rather,
+ * when we say "drawer", we are referring to that object that holds blocks.
  * 
  * *****************NAMING OF DRAWERS*************************
  * Each factory may have only ONE drawer with a particular name.
@@ -311,7 +311,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Swicth view to the set of static drawers
+     * Switch view to the set of static drawers
      */
     public void viewStaticDrawers() {
         this.navigator.setView(STATIC_NAME);
@@ -330,7 +330,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * may not two draers with the same name
+     * may not two drawers with the same name
      * @param sta
      * @param dyn
      * @param name

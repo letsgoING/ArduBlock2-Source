@@ -9,7 +9,6 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import com.ardublock.translator.block.numbers.LocalVariableNumberBlock;
-import com.ardublock.translator.block.numbers.NumberBlock;
 import com.ardublock.translator.block.numbers.VariableNumberBlock;
 
 public class SetterNumberArrayBlock extends TranslatorBlock

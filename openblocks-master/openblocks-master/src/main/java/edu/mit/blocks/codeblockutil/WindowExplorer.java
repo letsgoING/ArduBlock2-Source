@@ -66,7 +66,7 @@ public class WindowExplorer extends JPanel implements Explorer {
 
     /**
      * Reassigns the set of canvases that this explorer controls.
-     * Though the collection of canvas mnay be empty, it may not be null.
+     * Though the collection of canvas may be empty, it may not be null.
      * @param items
      *
      * @requires items != null &&

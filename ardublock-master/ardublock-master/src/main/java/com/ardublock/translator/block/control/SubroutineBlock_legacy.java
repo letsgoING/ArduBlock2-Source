@@ -5,10 +5,10 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class SubroutineBlock extends TranslatorBlock
+public class SubroutineBlock_legacy extends TranslatorBlock
 {
 
-	public SubroutineBlock(Long blockId, Translator translator,
+	public SubroutineBlock_legacy(Long blockId, Translator translator,
 			String codePrefix, String codeSuffix, String label) {
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -21,11 +21,8 @@ public class SubroutineBlock extends TranslatorBlock
 		translator.addDefinitionCommand("void " + subroutineName + "();\n");
 		String ret = "";
 		
-		TranslatorBlock tb_commentBlock = getRequiredTranslatorBlockAtSocket(0);
-		ret += "//"+tb_commentBlock.toCode().replaceAll("\"", "")+"\n";
-		
 		ret += "void " + subroutineName + "()\n{\n";
-		TranslatorBlock tb_comandsBlock = getTranslatorBlockAtSocket(1);
+		TranslatorBlock tb_comandsBlock = getTranslatorBlockAtSocket(0);
 		while (tb_comandsBlock != null)
 		{
 			ret += tb_comandsBlock.toCode();

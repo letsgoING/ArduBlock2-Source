@@ -24,7 +24,7 @@ import javax.swing.Timer;
 import edu.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
 
 /**
- * See documentaton for Explorer.
+ * See documentation for Explorer.
  * 
  * A PopupExplorer explores the canvas by normally
  * displaying only the canvas.  When the user mouses over
