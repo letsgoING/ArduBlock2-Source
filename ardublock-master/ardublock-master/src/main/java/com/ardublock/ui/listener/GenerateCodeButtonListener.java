@@ -48,30 +48,16 @@ public class GenerateCodeButtonListener implements ActionListener
 		Set<RenderableBlock> loopBlockSet = new HashSet<RenderableBlock>();
 		Set<RenderableBlock> subroutineBlockSet = new HashSet<RenderableBlock>();
 		Set<RenderableBlock> interruptBlockSet = new HashSet<RenderableBlock>();
-//		Set<RenderableBlock> scoopBlockSet = new HashSet<RenderableBlock>();
-//		Set<RenderableBlock> guinoBlockSet = new HashSet<RenderableBlock>();
+		Set<RenderableBlock> commentBlockSet = new HashSet<RenderableBlock>();
 		StringBuilder code = new StringBuilder();
 		
 		
 		for (RenderableBlock renderableBlock:renderableBlocks)
 		{
 			Block block = renderableBlock.getBlock();
-			
-/*			if (block.getGenusName().equals("DuinoEDU_Guino_Read"))
-			{
-				translator.setGuinoProgram(true);
 				
-			}
-			if ((block.getGenusName().equals("DuinoEDU_Guino_Title")) || (block.getGenusName().equals("DuinoEDU_Guino_Slider")) || (block.getGenusName().equals("DuinoEDU_Guino_column")) || (block.getGenusName().equals("DuinoEDU_Guino_switch"))|| (block.getGenusName().equals("DuinoEDU_Guino_pause")) ) 
-			{
-				translator.setGuinoProgram(true);
-				
-			}
-			
-*/			
 			if (!block.hasPlug() && (Block.NULL.equals(block.getBeforeBlockID())))
 			{
-				
 				if(block.getGenusName().equals("loop"))
 				{
 					loopBlockSet.add(renderableBlock);
@@ -89,6 +75,10 @@ public class GenerateCodeButtonListener implements ActionListener
 					loopBlockSet.add(renderableBlock);
 				}
 				if(block.getGenusName().equals("program"))
+				{
+					loopBlockSet.add(renderableBlock);
+				}
+				if(block.getGenusName().equals("sketch"))
 				{
 					loopBlockSet.add(renderableBlock);
 				}
@@ -160,23 +150,10 @@ public class GenerateCodeButtonListener implements ActionListener
 					}
 					interruptBlockSet.add(renderableBlock);
 				}
-
-/*				if (block.getGenusName().equals("scoop_task"))
+				if(block.getGenusName().equals("program_comment")) //letsgoING
 				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-				if (block.getGenusName().equals("scoop_loop"))
-				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-				if (block.getGenusName().equals("scoop_pin_event"))
-				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-*/				
+					commentBlockSet.add(renderableBlock);
+				}		
 			}
 		}
 		if (loopBlockSet.size() == 0) {
@@ -194,6 +171,12 @@ public class GenerateCodeButtonListener implements ActionListener
 
 		try
 		{
+			for (RenderableBlock renderableBlock : commentBlockSet)
+			{
+				translator.setRootBlockName("program_comment");
+				Block commentBlock = renderableBlock.getBlock();
+				code.append(translator.translate(commentBlock.getBlockID()));
+			}
 			
 			for (RenderableBlock renderableBlock : loopBlockSet)
 			{
@@ -201,20 +184,6 @@ public class GenerateCodeButtonListener implements ActionListener
 				Block loopBlock = renderableBlock.getBlock();
 				code.append(translator.translate(loopBlock.getBlockID()));
 			}
-			
-/*			for (RenderableBlock renderableBlock : scoopBlockSet)
-			{
-				translator.setRootBlockName("scoop");
-				Block scoopBlock = renderableBlock.getBlock();
-				code.append(translator.translate(scoopBlock.getBlockID()));
-			}
-			for (RenderableBlock renderableBlock : guinoBlockSet)
-			{
-				translator.setRootBlockName("guino");
-				Block guinoBlock = renderableBlock.getBlock();
-				code.append(translator.translate(guinoBlock.getBlockID()));
-			}
-*/			
 			
 			for (RenderableBlock renderableBlock : subroutineBlockSet)
 			{

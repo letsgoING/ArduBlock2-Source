@@ -73,6 +73,16 @@
 				<BlockConnector connector-type="cmd" connector-kind="socket" label="bc.loop" />
 			</BlockConnectors>
 		</BlockGenus>
+		<BlockGenus name="sketch" kind="command" color="255 240 0" initlabel="bg.sketch" is-starter="yes" is-terminator="yes" label-unique="no">
+			<description>
+				<text>this is the header, setup and the loop of the arduino-code</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="cmd" connector-kind="socket" label="bc.head" />
+				<BlockConnector connector-type="cmd" connector-kind="socket" label="bc.setup" />
+				<BlockConnector connector-type="cmd" connector-kind="socket" label="bc.loop" />
+			</BlockConnectors>
+		</BlockGenus>
 		<BlockGenus name="loop" kind="command" color="255 240 0" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="yes">
 			<description>
 				<text>this is the loop of the arduino</text>
@@ -199,10 +209,15 @@
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine" kind="command" color="200 220 0" initlabel="bg.subroutine" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine_com" kind="command" color="200 220 0" initlabel="bg.subroutine_com" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<description>
 				<text>subroutine</text>
 			</description>
+			<BlockConnectors>
+				<BlockConnector label="bc.fcn_description" connector-type="string" connector-kind="socket">
+					<DefaultArg genus-name="string" label="Funktionsbeschreibung" />
+				</BlockConnector>
+			</BlockConnectors>
 			<BlockConnectors>
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
@@ -212,8 +227,11 @@
 				<text>invoke subroutine</text>
 			</description>
 		</BlockGenus>
-		<BlockGenus name="subroutine_varret" kind="command" color="200 220 0" initlabel="bg.subroutine_varret" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine_varret_com" kind="command" color="200 220 0" initlabel="bg.subroutine_varret_com" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<BlockConnectors>
+				<BlockConnector label="bc.fcn_description" connector-type="string" connector-kind="socket">
+					<DefaultArg genus-name="string" label="Funktionsbeschreibung" />
+				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
 					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
 				</BlockConnector>
@@ -231,8 +249,11 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine_var" kind="command" color="200 220 0" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine_var_com" kind="command" color="200 220 0" initlabel="bg.subroutine_var_com" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<BlockConnectors>
+				<BlockConnector label="bc.fcn_description" connector-type="string" connector-kind="socket">
+					<DefaultArg genus-name="string" label="Funktionsbeschreibung" />
+				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
 					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
 				</BlockConnector>
@@ -251,6 +272,35 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
+		<!-- legacy support -->
+		<BlockGenus name="subroutine" kind="command" color="200 220 0" initlabel="bg.subroutine" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+			<description>
+				<text>subroutine</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="subroutine_varret" kind="command" color="200 220 0" initlabel="bg.subroutine_varret" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
+					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
+				</BlockConnector>
+				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
+				<BlockConnector label="bc.sub_return" connector-type="number" connector-kind="socket" position-type="single">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="subroutine_var" kind="command" color="200 220 0" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.sub_var">
+					<DefaultArg genus-name="local_variable_number" label="lokaleUebergabeVariable" />
+				</BlockConnector>
+				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
+			</BlockConnectors>
+		</BlockGenus>
+		<!-- end of legacy support -->
 		<BlockGenus name="interrupt" kind="command" color="200 220 0" initlabel="bg.interrupt" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<description>
 				<text>Interrupt Routine</text>
@@ -2216,6 +2266,30 @@
 		</BlockGenus>
 		
 		<!-- ******************** Code Menu *************** -->
+		<BlockGenus name="program_comment" kind="command" color="0 176 80" initlabel="bg.program_comment" is-starter="yes" is-terminator="yes" label-unique="no">
+			<description>
+				<text>add comment</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.prog_name">
+					<DefaultArg genus-name="string" label="Dateiname/Programmbezeichnung" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.prog_author">
+					<DefaultArg genus-name="string" label="Name oder Kuerzel" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.prog_description">
+					<DefaultArg genus-name="string" label="Kurzbeschreibung Programmfunktion" />
+				</BlockConnector>
+				<BlockConnector connector-type="string" connector-kind="socket" />
+				<BlockConnector connector-type="string" connector-kind="socket" />
+				<BlockConnector connector-type="string" connector-kind="socket" label="bc.prog_date">
+					<DefaultArg genus-name="string" label="01.01.2019" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.prog_version">
+					<DefaultArg genus-name="number" label="0.1" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<BlockGenus name="code_loop" kind="command" color="0 176 80" initlabel="bg.code_loop">
 			<description>
 				<text>add custom code</text>
@@ -2236,13 +2310,13 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="code_setup" kind="command" color="0 176 80" initlabel="bg.code_setup">
+		<BlockGenus name="code_comment_head" kind="command" color="0 176 80" initlabel="bg.code_comment_head">
 			<description>
-				<text>add custom code</text>
+				<text>add comment to program head</text>
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="string" connector-kind="socket">
-					<DefaultArg genus-name="string" label="i = 3;" />
+					<DefaultArg genus-name="string" label="Kommentartext;" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -2252,7 +2326,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="string" connector-kind="socket">
-					<DefaultArg genus-name="string" label="Kommentar" />
+					<DefaultArg genus-name="string" label="Kommentartext" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -2326,8 +2400,11 @@
 		</BlockFamily>
 		<BlockFamily>
 			<FamilyMember>code_head</FamilyMember>
-			<FamilyMember>code_setup</FamilyMember>
 			<FamilyMember>code_loop</FamilyMember>
+		</BlockFamily>
+		<BlockFamily>
+			<FamilyMember>code_comment</FamilyMember>
+			<FamilyMember>code_comment_head</FamilyMember>
 		</BlockFamily>
 		<BlockFamily>
 			<FamilyMember>LGI_Qtouch_Init1</FamilyMember>
@@ -2349,8 +2426,9 @@
 	<BlockDrawerSets>
 		<BlockDrawerSet name="factory" type="stack" location="southwest" window-per-drawer="no" drawer-draggable="no">
 			<BlockDrawer button-color="255 215 0" name="bd.control" type="default"> 
-				<BlockGenusMember>program</BlockGenusMember>
+				<!-- <BlockGenusMember>program</BlockGenusMember> -->
 				<BlockGenusMember>loop</BlockGenusMember>
+				<BlockGenusMember>sketch</BlockGenusMember>
 				
 				<BlockGenusMember>if</BlockGenusMember>
 				<BlockGenusMember>ifelse</BlockGenusMember>
@@ -2362,12 +2440,13 @@
 				<BlockGenusMember>delay</BlockGenusMember>
 				<BlockGenusMember>wait</BlockGenusMember>
 				
-				<BlockGenusMember>subroutine</BlockGenusMember>
+				<BlockGenusMember>subroutine_com</BlockGenusMember>
 				<BlockGenusMember>subroutine-ref</BlockGenusMember>
 			</BlockDrawer>
 			<BlockDrawer button-color="255 215 0" name="bd.control" type="custom"> 
-				<BlockGenusMember>program</BlockGenusMember>
+				<!-- <BlockGenusMember>program</BlockGenusMember> -->
 				<BlockGenusMember>loop</BlockGenusMember>
+				<BlockGenusMember>sketch</BlockGenusMember>
 				
 				<BlockGenusMember>if</BlockGenusMember>
 				<BlockGenusMember>ifelse</BlockGenusMember>
@@ -2381,11 +2460,11 @@
 				<BlockGenusMember>delay_microseconds</BlockGenusMember>
 				<BlockGenusMember>wait</BlockGenusMember>
 				
-				<BlockGenusMember>subroutine</BlockGenusMember>
+				<BlockGenusMember>subroutine_com</BlockGenusMember>
 				<BlockGenusMember>subroutine-ref</BlockGenusMember>
-				<BlockGenusMember>subroutine_var</BlockGenusMember>
+				<BlockGenusMember>subroutine_var_com</BlockGenusMember>
 				<BlockGenusMember>subroutine-ref_var</BlockGenusMember>
-				<BlockGenusMember>subroutine_varret</BlockGenusMember>
+				<BlockGenusMember>subroutine_varret_com</BlockGenusMember>
 				<BlockGenusMember>subroutine-ref_varret</BlockGenusMember>
 				
 				<BlockGenusMember>interrupt</BlockGenusMember>
@@ -2660,11 +2739,17 @@
 				<BlockGenusMember>sd_file_available</BlockGenusMember>
 			</BlockDrawer>
 			
+			<BlockDrawer button-color="0 176 80" name="bd.code" type="default">
+				<BlockGenusMember>program_comment</BlockGenusMember>
+				<BlockGenusMember>code_comment</BlockGenusMember>
+				<BlockGenusMember>code_comment_head</BlockGenusMember>
+			</BlockDrawer>
 			<BlockDrawer button-color="0 176 80" name="bd.code" type="custom">
-				<BlockGenusMember>code_head</BlockGenusMember>
-				<BlockGenusMember>code_setup</BlockGenusMember>
+				<BlockGenusMember>program_comment</BlockGenusMember>
 				<BlockGenusMember>code_loop</BlockGenusMember>
 				<BlockGenusMember>code_comment</BlockGenusMember>
+				<BlockGenusMember>code_head</BlockGenusMember>
+				<BlockGenusMember>code_comment_head</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- Shapes are automatically loaded as blocks in the Shapes drawer (see slcodeblocks.ShapeBlocksGenerator for details) -->

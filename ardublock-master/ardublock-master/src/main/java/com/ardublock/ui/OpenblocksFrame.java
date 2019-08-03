@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.undo.UndoManager;
 
 import com.ardublock.core.Context;
 import com.ardublock.ui.listener.ArdublockWorkspaceListener;
@@ -41,6 +42,8 @@ import com.ardublock.ui.listener.SaveImageButtonListener;
 //import com.ardublock.ui.listener.ZoomResetButtonListener;
 
 
+
+
 import edu.mit.blocks.controller.WorkspaceController;
 import edu.mit.blocks.workspace.Workspace;
 import edu.mit.blocks.workspace.ZoomSlider;
@@ -56,8 +59,10 @@ public class OpenblocksFrame extends JFrame
 	private Context context;
 	private JFileChooser fileChooser;
 	private FileFilter ffilter;
-	
+		
 	private boolean workspaceModeState = false;
+	
+	private UndoManager undoManager;
 	
 	private ResourceBundle uiMessageBundle;
 	
@@ -100,6 +105,9 @@ public class OpenblocksFrame extends JFrame
 	private void initOpenBlocks()
 	{
 		final Context context = Context.getContext();
+		
+		undoManager = new UndoManager();
+        undoManager.setLimit(1000);
 		
 		/*
 		WorkspaceController workspaceController = context.getWorkspaceController();
@@ -279,7 +287,7 @@ public class OpenblocksFrame extends JFrame
 			}
 		};
 		modeButton.addActionListener(modeButtonListener);
-		KeyStroke ctrleKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK);
+		KeyStroke ctrleKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK);
 		modeButton.registerKeyboardAction(modeButtonListener, ctrleKeyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
 		modeButton.setToolTipText(uiMessageBundle.getString("ardublock.ui.modeButton.mode.tooltip"));
 		//*****************************************
