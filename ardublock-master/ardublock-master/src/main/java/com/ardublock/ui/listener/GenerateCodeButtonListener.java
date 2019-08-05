@@ -16,6 +16,7 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import com.ardublock.ui.OpenblocksFrame;
 
 import edu.mit.blocks.codeblocks.Block;
 import edu.mit.blocks.renderable.RenderableBlock;
@@ -27,10 +28,12 @@ public class GenerateCodeButtonListener implements ActionListener
 	private Context context;
 	private Workspace workspace; 
 	private ResourceBundle uiMessageBundle;
+	private OpenblocksFrame openBlocksFrame;
 	
-	public GenerateCodeButtonListener(JFrame frame, Context context)
+	public GenerateCodeButtonListener(JFrame frame, OpenblocksFrame obFrame, Context context)
 	{
 		this.parentFrame = frame;
+		this.openBlocksFrame=obFrame;
 		this.context = context;
 		workspace = context.getWorkspaceController().getWorkspace();
 		uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
@@ -42,6 +45,9 @@ public class GenerateCodeButtonListener implements ActionListener
 		success = true;
 		Translator translator = new Translator(workspace);
 		translator.reset();
+		
+		//AutoSave on Upload letsgoING
+		openBlocksFrame.doSaveArduBlockFile();
 		
 		Iterable<RenderableBlock> renderableBlocks = workspace.getRenderableBlocks();
 		
@@ -86,7 +92,7 @@ public class GenerateCodeButtonListener implements ActionListener
 				{
 					loopBlockSet.add(renderableBlock);
 				}
-				if (block.getGenusName().equals("subroutine"))
+				if (block.getGenusName().equals("subroutine") || block.getGenusName().equals("subroutine_com"))
 				{
 					String functionName = block.getBlockLabel().trim();
 					try
@@ -102,7 +108,7 @@ public class GenerateCodeButtonListener implements ActionListener
 					}
 					subroutineBlockSet.add(renderableBlock);
 				}
-				if (block.getGenusName().equals("subroutine_var"))
+				if (block.getGenusName().equals("subroutine_var") || block.getGenusName().equals("subroutine_var_com"))
 				{
 					String functionName = block.getBlockLabel().trim();
 					try
@@ -118,7 +124,7 @@ public class GenerateCodeButtonListener implements ActionListener
 					}
 					subroutineBlockSet.add(renderableBlock);
 				}
-				if (block.getGenusName().equals("subroutine_varret"))
+				if (block.getGenusName().equals("subroutine_varret") || block.getGenusName().equals("subroutine_varret_com"))
 				{
 					String functionName = block.getBlockLabel().trim();
 					try

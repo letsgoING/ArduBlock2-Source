@@ -19,14 +19,14 @@ public class WhileBlock extends TranslatorBlock
 		String ret = "while ( ";
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		ret = ret + translatorBlock.toCode().replaceAll("\\s*_.new\\b\\s*", "");
-		ret = ret + " )\n\t{\n";
+		ret = ret + " ) {\n";
 		translatorBlock = getTranslatorBlockAtSocket(1);
 		while (translatorBlock != null)
 		{
-			ret = ret + "\t"+translatorBlock.toCode();
+			ret = ret +translatorBlock.toCode();
 			translatorBlock = translatorBlock.nextTranslatorBlock();
 		}
-		ret = ret + "\t}\n\n";
+		ret = ret + "}\n";
 		return ret;
 	}
 

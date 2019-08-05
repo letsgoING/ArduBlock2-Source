@@ -44,7 +44,7 @@ public class RepeatControlBlock extends TranslatorBlock
 
 		String ret = "";
 
-		ret = ret + "for( int" + varName + " = " + startVal + "; \n" + 
+		ret = ret + "for ( int" + varName + " = " + startVal + "; \n" + 
 				    startVal + "<=" + stopVal + "?" + varName + " <= " + stopVal + ":" + varName + " >= " + stopVal + "; \n" + 
 				    startVal + "<=" + stopVal + "?" + varName + " = "  + varName + " + " + incVal + ":" +  varName + " = " + varName + " - " + incVal + ")\n{"; 
 
