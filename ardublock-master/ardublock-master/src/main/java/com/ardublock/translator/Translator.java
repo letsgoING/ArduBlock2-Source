@@ -92,6 +92,7 @@ public class Translator
 		StringBuilder setupFunction = new StringBuilder();
 		setupFunction.append("void setup()\n{\n");
 		
+		//Replaced with "addSetupCommand" in DigitalInputBlock letsgoING
 		if (!inputPinSet.isEmpty())
 		{
 			for (String pinNumber:inputPinSet)
@@ -99,6 +100,7 @@ public class Translator
 				setupFunction.append("pinMode( " + pinNumber + " , INPUT);\n");
 			}
 		}
+		//Replaced with "addSetupCommand" in DigitalOutputBlock letsgoING
 		if (!outputPinSet.isEmpty())
 		{
 			for (String pinNumber:outputPinSet)

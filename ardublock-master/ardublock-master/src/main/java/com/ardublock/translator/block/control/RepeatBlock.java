@@ -66,7 +66,7 @@ public class RepeatBlock extends TranslatorBlock
 			ret += variableName;
 		}
 		
-		ret += " = 0; " + variableName +" < " + value + "; "+ variableName +"++){\n"; 
+		ret += " = 0; " + variableName +" < " + value + "; "+ variableName +"++) {\n"; 
 
 		TranslatorBlock translatorBlock = getTranslatorBlockAtSocket(2);
 		while (translatorBlock != null)

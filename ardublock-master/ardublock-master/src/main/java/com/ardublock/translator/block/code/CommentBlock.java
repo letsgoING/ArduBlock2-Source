@@ -17,7 +17,7 @@ public class CommentBlock extends TranslatorBlock
 	{
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		String comment = translatorBlock.toCode().replaceAll("\"", "");
-		String ret = "//"+ comment +"\n";
+		String ret = "\n//"+ comment+"\n";
 		return ret;
 	}
 }

@@ -4,6 +4,8 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import com.ardublock.translator.block.numbers.NumberBlock;
+import com.ardublock.translator.block.numbers.VariableNumberBlock;
 
 public class DigitalOutputBlock extends TranslatorBlock
 {
@@ -15,9 +17,15 @@ public class DigitalOutputBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
+		
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		String number = translatorBlock.toCode().replaceAll("\\s*_.new\\b\\s*", "");
-		translator.addOutputPin(number.trim());
+		
+		//ToDo: 
+		if(translatorBlock instanceof NumberBlock || translatorBlock instanceof VariableNumberBlock){
+			//translator.addOutputPin(number.trim());
+			translator.addSetupCommand("pinMode("+number.trim()+", OUTPUT);");
+		}
 		
 		String ret = "digitalWrite( ";
 		ret = ret + number;

@@ -343,6 +343,16 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+		<BlockGenus name="pin-mode-output" kind="command" color="74 108 212" initlabel="bg.pin-mode-output">
+			<description>
+				<text>set pinMode to OUTPUT</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<BlockGenus name="servo_default" kind="command" color="74 108 212"	label-prefix="" initlabel="bg.servo">
 			<description>
 				<text>Servo Default</text>
@@ -624,11 +634,21 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number"
-					connector-kind="socket" label="bc.pin_number">
+					connector-kind="socket" label="bc.pin_number_analog">
 					<DefaultArg genus-name="number" label="0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"
 					connector-kind="plug" />
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="pin-mode-input" kind="command" color="44 165 226" initlabel="bg.pin-mode-input">
+			<description>
+				<text>set pinMode to INPUT</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"	connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="number" label="2" />
+				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
 		<BlockGenus name="LGI_Qtouch_Init1" kind="command" color="44 165 226" initlabel="bg.LGI_Qtouch_Init1">
@@ -2477,6 +2497,7 @@
 			<BlockDrawer button-color="74 108 212" name="bd.output"	type="custom">
 				<BlockGenusMember>pin-write-digital</BlockGenusMember>
 				<BlockGenusMember>pin-write-analog</BlockGenusMember>
+				<BlockGenusMember>pin-mode-output</BlockGenusMember>
 				
 				<BlockGenusMember>neopixel_init</BlockGenusMember>
 				<BlockGenusMember>neopixel_pixel_color</BlockGenusMember>
@@ -2506,6 +2527,7 @@
 				<BlockGenusMember>pin-read-digital</BlockGenusMember>
 				<BlockGenusMember>pin-read-analog</BlockGenusMember>
 				<BlockGenusMember>pin-read-digital-pullup</BlockGenusMember>
+				<BlockGenusMember>pin-mode-input</BlockGenusMember>
 
 				<BlockGenusMember>LGI_Ultrasonic</BlockGenusMember>  				
 				
@@ -2570,6 +2592,9 @@
 				<BlockGenusMember>subtraction</BlockGenusMember>
 				<BlockGenusMember>multiplication</BlockGenusMember>
 				<BlockGenusMember>division</BlockGenusMember>
+				
+				<BlockGenusMember>modulo</BlockGenusMember>
+				<BlockGenusMember>abs</BlockGenusMember>
 				
 				<BlockGenusMember>map_common</BlockGenusMember>
 				<BlockGenusMember>map</BlockGenusMember>

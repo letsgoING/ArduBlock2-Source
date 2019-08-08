@@ -4,6 +4,8 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import com.ardublock.translator.block.numbers.NumberBlock;
+import com.ardublock.translator.block.numbers.VariableNumberBlock;
 
 public class DigitalInputBlock extends TranslatorBlock
 {
@@ -18,7 +20,12 @@ public class DigitalInputBlock extends TranslatorBlock
 		String number;
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		number = translatorBlock.toCode().replaceAll("\\s*_.new\\b\\s*", "");
-		translator.addInputPin(number.trim());
+		
+		if(translatorBlock instanceof NumberBlock || translatorBlock instanceof VariableNumberBlock){
+			//translator.addInputPin(number.trim());
+			translator.addSetupCommand("pinMode("+number.trim()+", INPUT);");
+		}
+		
 		
 		String ret = "digitalRead(";
 		ret = ret + number;

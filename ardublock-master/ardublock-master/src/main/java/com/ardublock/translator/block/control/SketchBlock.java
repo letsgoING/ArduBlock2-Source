@@ -84,7 +84,7 @@ public class SketchBlock extends TranslatorBlock
 		
 		for (String command : setupCommand)
 		{
-			translator.addSetupCommandForced(command);
+			translator.addSetupCommand(command);
 		}
 	}
 	

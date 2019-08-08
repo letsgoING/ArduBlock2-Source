@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.undo.UndoManager;
 
 import com.ardublock.core.Context;
 import com.ardublock.ui.listener.ArdublockWorkspaceListener;
@@ -61,8 +60,6 @@ public class OpenblocksFrame extends JFrame
 	private FileFilter ffilter;
 		
 	private boolean workspaceModeState = false;
-	
-	private UndoManager undoManager;
 	
 	private ResourceBundle uiMessageBundle;
 	
@@ -106,9 +103,6 @@ public class OpenblocksFrame extends JFrame
 	{
 		final Context context = Context.getContext();
 		
-		undoManager = new UndoManager();
-        undoManager.setLimit(1000);
-		
 		/*
 		WorkspaceController workspaceController = context.getWorkspaceController();
 		JComponent workspaceComponent = workspaceController.getWorkspacePanel();
@@ -151,7 +145,7 @@ public class OpenblocksFrame extends JFrame
 		openButton.setToolTipText(uiMessageBundle.getString("ardublock.ui.load.tooltip"));
 		
 		JButton generateButton = new JButton(uiMessageBundle.getString("ardublock.ui.upload"));
-		ActionListener generateButtonListener = new GenerateCodeButtonListener(this, context);
+		ActionListener generateButtonListener = new GenerateCodeButtonListener(this, this, context);
 		generateButton.addActionListener(generateButtonListener);
 		KeyStroke ctrluKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.CTRL_MASK);
 		generateButton.registerKeyboardAction(generateButtonListener, ctrluKeyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);

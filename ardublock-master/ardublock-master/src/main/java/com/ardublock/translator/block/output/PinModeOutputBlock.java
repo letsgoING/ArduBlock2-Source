@@ -1,13 +1,13 @@
-package com.ardublock.translator.block.code;
+package com.ardublock.translator.block.output;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class CommentHeadBlock extends TranslatorBlock
+public class PinModeOutputBlock extends TranslatorBlock
 {
-	public CommentHeadBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+	public PinModeOutputBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -15,10 +15,12 @@ public class CommentHeadBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
+		String number;
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-		String comment = translatorBlock.toCode().replaceAll("\"", "");
-		String ret = "\n//"+ comment+"\n";
-		translator.addDefinitionCommand(ret);
-		return "";
+		number = translatorBlock.toCode().replaceAll("\\s*_.new\\b\\s*", "");
+		
+		String ret = "pinMode("+number.trim()+", OUTPUT);";
+		return codePrefix + ret + codeSuffix;
 	}
+
 }

@@ -19,7 +19,7 @@ public class RepeatTimesBlock extends TranslatorBlock
 		String ret = "for (int i = 0; i < ";
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		ret = ret + translatorBlock.toCode().replaceAll("\\s*_.new\\b\\s*", "");
-		ret = ret + "; i++){\n";
+		ret = ret + "; i++) {\n";
 		
 		
 		translatorBlock = getTranslatorBlockAtSocket(1);
