@@ -511,22 +511,22 @@
 				<text>neopixel_init</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="number"
+				<!--<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.pin_number">
 					<DefaultArg genus-name="number" label="2" />
-				</BlockConnector>
+				</BlockConnector>-->
 				<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.Nb_of_Led">
 					<DefaultArg genus-name="number" label="1" />
 				</BlockConnector>
-				<BlockConnector connector-type="string"
+				<!--<BlockConnector connector-type="string"
 					connector-kind="socket" label="bc.schnittstelle">
 					<DefaultArg genus-name="string" label="NEO_KHZ800" />
 				</BlockConnector>
 				<BlockConnector connector-type="string"
 					connector-kind="socket" label="bc.farbfolge">
 					<DefaultArg genus-name="string" label="NEO_RGB" />
-				</BlockConnector>
+				</BlockConnector>-->
 			</BlockConnectors>
 			<Images>
 				<Image>
@@ -539,25 +539,25 @@
 				<text>neopixel_pixel_colorRGB</text>
 			</description>
 			<BlockConnectors>
-				<BlockConnector connector-type="number"
+				<!--<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.pin_number">
 					<DefaultArg genus-name="number" label="2" />
-				</BlockConnector>
+				</BlockConnector>-->
 				<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.Pixel_Nb">
 					<DefaultArg genus-name="number" label="0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.red">
-					<DefaultArg genus-name="number" label="100" />
+					<DefaultArg genus-name="number" label="255" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.green">
-					<DefaultArg genus-name="number" label="100" />
+					<DefaultArg genus-name="number" label="255" />
 				</BlockConnector>
 				<BlockConnector connector-type="number"
 					connector-kind="socket" label="bc.blue">
-					<DefaultArg genus-name="number" label="100" />
+					<DefaultArg genus-name="number" label="255" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -2442,9 +2442,24 @@
 			<FamilyMember>LGI_Qtouch_Button3_getRaw</FamilyMember>			
 		</BlockFamily>
 	</BlockFamilies>
-	
-	<BlockDrawerSets>
+		<BlockDrawerSets>	
 		<BlockDrawerSet name="factory" type="stack" location="southwest" window-per-drawer="no" drawer-draggable="no">
+			<BlockDrawer button-color="74 108 212" name="bd.tetrapix" type="default">
+				<BlockGenusMember>neopixel_init</BlockGenusMember>
+				<BlockGenusMember>neopixel_pixel_color</BlockGenusMember>
+				<!-- <BlockGenusMember>neopixel_brightness</BlockGenusMember>
+				<BlockGenusMember>neopixel_show</BlockGenusMember>	-->
+				<BlockGenusMember>repeat_times</BlockGenusMember>
+				<BlockGenusMember>repeat_control</BlockGenusMember>
+				<BlockGenusMember>delay</BlockGenusMember>
+				
+			</BlockDrawer>
+			<BlockDrawer button-color="74 108 212" name="bd.tetrapix" type="custom">
+				<BlockGenusMember>if</BlockGenusMember>
+				<BlockGenusMember>ifelse</BlockGenusMember>
+				<BlockGenusMember>while</BlockGenusMember>
+				
+			</BlockDrawer>
 			<BlockDrawer button-color="255 215 0" name="bd.control" type="default"> 
 				<!-- <BlockGenusMember>program</BlockGenusMember> -->
 				<BlockGenusMember>loop</BlockGenusMember>
@@ -2489,7 +2504,6 @@
 				
 				<BlockGenusMember>interrupt</BlockGenusMember>
 			</BlockDrawer>
-			
 			<BlockDrawer button-color="74 108 212" name="bd.output"	type="default">
 				<BlockGenusMember>pin-write-digital</BlockGenusMember>
 				<BlockGenusMember>pin-write-analog</BlockGenusMember>
