@@ -2,9 +2,7 @@
 build/
 target/
 .DS_Store
-.classpath
 .idea
-.project
 .settings
 openblocks.iml
 bin/
