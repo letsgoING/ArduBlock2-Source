@@ -3,5 +3,7 @@ target/
 .DS_Store
 .idea
 .settings
+.classpath
+.project
 openblocks.iml
 
