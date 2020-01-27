@@ -1,6 +1,6 @@
 # ArduBlock 2 Source (for Arduino IDE 1.8+) #
 
-Source-Code for ArduBlock V2 for letsgoING Project.
+Source-Code for ArduBlock V2 tetrapix workshop, forked from the letsgoING Project.
 
 ## Setting up Eclipse ##
 1. Download the files
