@@ -44,6 +44,7 @@ Authors
 ----
 * David Li taweili@gmail.com
 * HE Qichen heqichen@gmail.com
+* Bastian Brabec bastian@tetrapix.de (for the Tetrapix Fork)
 
 
 ToDo
@@ -54,6 +55,8 @@ License
 ----
 
 Copyright (C) 2011 David Li and He Qichen
+
+Copyright (C) 2019 Bastian Brabec
 
 This file is part of ArduBlock.
 
@@ -93,3 +96,13 @@ Source:		github.com/letsgoing
 - hack to remove \n at array declaration -> AutoFormat.java line 602-606
 - removed \n after function declaration  -> AutoFormat.java line 845
 - removed headerCommand for subroutines (now done in BlockFiles)-> Translator.java line 78-85
+
+
+Changes by Tetrapix
+=====================
+
+Contact: 	bastian@tetrapix.de
+Source:		github.com/tetrapix
+
+- added the blocks for the tetrapix Workshop
+- removed some other blocks
