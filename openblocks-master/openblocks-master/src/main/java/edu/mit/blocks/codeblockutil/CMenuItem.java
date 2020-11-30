@@ -46,7 +46,7 @@ public class CMenuItem extends JButton implements MouseListener {
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
         String text = this.getText();
         if (text != null) {
-            Font font = g2.getFont().deriveFont((float) (((float) this.getHeight()) * .8));
+            Font font = g2.getFont().deriveFont((float)(((float) this.getHeight()) * .8));
             g2.setFont(font);
 
             FontMetrics metrics = g2.getFontMetrics();

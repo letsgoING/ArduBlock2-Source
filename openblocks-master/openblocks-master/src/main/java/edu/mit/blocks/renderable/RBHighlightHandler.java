@@ -34,7 +34,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
 
     private static final long serialVersionUID = 328149080427L;
     //highlight stroke and width specifications
-    public static final int HIGHLIGHT_STROKE_WIDTH = 12;
+    public static final int HIGHLIGHT_STROKE_WIDTH = 20;
     private static final float HIGHLIGHT_ALPHA = .75f;
     private Color hColor = null;
     private boolean isSearchResult = false, hasFocus = false;

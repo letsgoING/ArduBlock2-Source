@@ -3,6 +3,7 @@ package edu.mit.blocks.workspace;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.ArrayList;
@@ -131,6 +132,7 @@ class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBPar
         for (Component c : this.getComponents()) {
             if (c instanceof RenderableBlock) {
                 rb = (RenderableBlock) c;
+                //TODO add block-zoom
                 rb.setBounds(tx, ty, rb.getBlockWidth(), rb.getBlockHeight());
                 ty = ty + BORDER_WIDTH + rb.getBlockHeight();
                 rb.repaint();

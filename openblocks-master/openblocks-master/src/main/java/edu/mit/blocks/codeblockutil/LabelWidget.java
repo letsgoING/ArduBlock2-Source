@@ -518,11 +518,10 @@ public abstract class LabelWidget extends JComponent {
         private void setSiblings(String[][] siblings) {
             popupmenu = new CPopupMenu();
             //if connected to a block, add self and add siblings
-            for (int i = 0; i < siblings.length; i++) {
+            for (int i = 0; i < siblings.length; i++) { 
                 final String selfGenus = siblings[i][0];
                 CMenuItem selfItem = new CMenuItem(siblings[i][1]);
                 selfItem.addActionListener(new ActionListener() {
-
                     public void actionPerformed(ActionEvent e) {
                         fireGenusChanged(selfGenus);
                         showMenuIcon(false);
@@ -552,7 +551,7 @@ public abstract class LabelWidget extends JComponent {
                 triangle.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
                 triangle.lineTo(0, this.getHeight() / 4);
                 triangle.closePath();
-
+                
                 g2.setColor(new Color(255, 255, 255, 100));
                 g2.fill(triangle);
                 g2.setColor(Color.BLACK);

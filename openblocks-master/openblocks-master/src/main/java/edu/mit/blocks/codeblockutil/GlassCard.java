@@ -14,7 +14,7 @@ import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
+//import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
@@ -50,7 +50,7 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
     private CButton button;
     /** The scroll that canvas lives in */
     private CScrollPane scroll;
-    private final static int SCROLLBAR_WIDTH = 18;
+    private final static int SCROLLBAR_WIDTH = 20;//13
 
     /**
      * constructor
@@ -154,8 +154,8 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
             // Set up first layer
             int buttonHeight = this.getHeight() - INSET * 2;
             int buttonWidth = this.getWidth() - INSET * 2;
-            int arc = buttonHeight;
-
+            int arc = buttonHeight; 
+/*
             if (this.pressed || this.selected) {
                 g2.setPaint(new GradientPaint(0, -buttonHeight, Color.darkGray, 0, buttonHeight, canvas.getColor(), false));
                 g2.fillRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
@@ -164,16 +164,36 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
             } else {
                 //paint highlightlayer
                 if (this.focus) {
-                    gb.setColor(Color.yellow);
+                    gb.setColor(Color.white);
                     gb.setStroke(new BasicStroke(3));
                     gb.drawRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
                     gb.setStroke(new BasicStroke(1));
                 }
                 // Paint the first layer
-                gb.setColor(canvas.getColor().darker());
+                gb.setColor(canvas.getColor());//.darker()); removed by letsgoING
                 gb.fillRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
                 gb.setColor(Color.darkGray);
                 gb.drawRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
+*/
+	            if (this.pressed || this.selected) {
+	                g2.setPaint(new GradientPaint(0, -buttonHeight, Color.darkGray, 0, buttonHeight, canvas.getColor(), false));
+	                g2.fillRect(INSET, INSET, buttonWidth, buttonHeight);
+	                g2.setColor(Color.darkGray);
+	                g2.drawRect(INSET, INSET, buttonWidth, buttonHeight);
+	            } else {
+	                //paint highlightlayer
+	                if (this.focus) {
+	                    gb.setColor(canvas.getColor());//Color.white);
+	                    gb.setStroke(new BasicStroke(3));
+	                    gb.drawRect(INSET, INSET, buttonWidth, buttonHeight);
+	                    gb.setStroke(new BasicStroke(1));
+	                }
+	                // Paint the first layer
+	                gb.setColor(canvas.getColor());//.darker()); removed by letsgoING
+	                gb.fillRect(INSET, INSET, buttonWidth, buttonHeight);
+	                //gb.setColor(canvas.getColor());
+	                //gb.drawRect(INSET, INSET, buttonWidth, buttonHeight);
+	                
 
                 // set up paint data fields for second layer
 
@@ -181,13 +201,14 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
                 int highlightWidth = buttonWidth;
                 int highlightArc = highlightHeight;
 
+                /* removed by letsgoING
                 // Paint the second layer
                 gb.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .8f));
 
                 gb.setColor(canvas.getColor());
-                gb.setClip(new RoundRectangle2D.Float(INSET, INSET, highlightWidth, highlightHeight, highlightArc, highlightArc));
+                //gb.setClip(new RoundRectangle2D.Float(INSET, INSET, highlightWidth, highlightHeight, highlightArc, highlightArc)); //removed by letsgoING
                 gb.fillRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
-
+				*/
                 // Blur
                 ConvolveOp blurOp = new ConvolveOp(new Kernel(3, 3, BLUR));
                 BufferedImage blurredImage = blurOp.filter(buffer, null);
@@ -195,16 +216,17 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
                 // Draw button
                 g2.drawImage(blurredImage, 1, 1, null);
             }
+	            
             // Draw the text (if any)
             String text = canvas.getName();
             if (text != null && buttonHeight > 4) {
                 //Font font = g2.getFont().deriveFont((float)(((float)this.getHeight()) * .6));
-                Font font = g2.getFont().deriveFont((float) (this.getHeight() - INSET * 2 - 2) * .7f);
+                Font font = g2.getFont().deriveFont((float) (this.getHeight() - INSET * 2 - 2) * 0.85f); //0.7
                 g2.setFont(font);
                 FontMetrics metrics = g2.getFontMetrics();
                 Rectangle2D textBounds = metrics.getStringBounds(text, g2);
                 float x = (float) ((this.getWidth() / 2) - (textBounds.getWidth() / 2));
-                float y = (float) ((this.getHeight() / 2) + (textBounds.getHeight() / 2)) - metrics.getDescent();
+                float y = (float) ((this.getHeight() / 2) + (textBounds.getHeight() / 2)) - metrics.getDescent()/2; // metrics.getDescent() -> metrics.getDescent()/2 by letsgoING
 
                 g.setColor(Color.black);
                 for (int i = 0; i < shadowPositionArray.length; i++) {

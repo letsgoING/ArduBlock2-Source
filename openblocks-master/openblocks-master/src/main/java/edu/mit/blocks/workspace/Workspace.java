@@ -145,6 +145,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         this.miniMap = new MiniMap(this);
         this.addWidget(this.miniMap, true, true);
+        
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 miniMap.repositionMiniMap();
@@ -153,10 +154,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.validate();
             }
         });
-
         blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), blockCanvas.getJComponent());
-        blockCanvasLayer.setOneTouchExpandable(true);
+        blockCanvasLayer.setOneTouchExpandable(false);
         blockCanvasLayer.setDividerSize(6);
         add(blockCanvasLayer, BLOCK_LAYER);
         validate();
@@ -547,17 +547,21 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 // a previously saved project is just opened and the blocks have not been
                 // moved yet. otherwise, the unzoomed X and Y are calculated in RenderableBlock
                 if (block.getUnzoomedX() == 0.0 && block.getUnzoomedY() == 0.0) {
-                    if (newZoom == 1.0) {
+                	//removed by letsgoING: to fix zoom position issue
+                	/*if (newZoom == 1.0) {
+                		System.out.println("NewZoom 1 - X:"+block.getX()+" Y:"+block.getY());
                         block.setUnzoomedX(block.getX());
                         block.setUnzoomedY(block.getY());
                     } else {
                         block.setUnzoomedX(block.calculateUnzoomedX(block.getX()));
-                        block.setUnzoomedY(block.calculateUnzoomedY(block.getY()));
-                    }
+                        block.setUnzoomedY(block.calculateUnzoomedY(block.getY()));                       
+                    }	*/
+                	
+                	//added by letsgoING:
+                	block.setUnzoomedX(block.getX());
+                    block.setUnzoomedY(block.getY());
                 } else {
                 }
-
-
                 if (block.hasComment()) {
                     //determine the new relative position of the comment based on the current relative position
                     cDX = (int) ((block.getComment().getX() - block.getX()) / oldZoom * newZoom);

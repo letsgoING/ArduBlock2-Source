@@ -171,8 +171,9 @@ public class GlassExplorer extends JPanel implements Explorer, FocusListener {
         if (this.getHeight() < this.drawers.size() * 25) {
             retardedPane.setPreferredSize(new Dimension(0, 0));
         } else {
-            retardedPane.setPreferredSize(new Dimension(0, this.getHeight() - this.drawers.size() * 25));
+            retardedPane.setPreferredSize(new Dimension(0, this.getHeight() - this.drawers.size() * ((this.getWidth()/10)+2))); //added by letsgoING ((this.getWidth()/10)+2) -> orig 25
         }
+
     }
 
     /**
@@ -242,10 +243,10 @@ public class GlassExplorer extends JPanel implements Explorer, FocusListener {
             int w = this.getWidth();
             int h = this.getHeight();
             g.setColor(this.getBackground());
-            g.fillRoundRect(-10, 10, w + 9, h - 40, 10 * 2, 10 * 2);
+            g.fillRoundRect(-10, 10, w + 9, h - 40, 5,5);//10 * 2, 10 * 2); letsgoING
             g2.setStroke(new BasicStroke(1));
             g.setColor(new Color(0, 0, 0, 100));
-            g.drawRoundRect(-10, 10, w + 8, h - 41, 10 * 2, 10 * 2);
+            g.drawRoundRect(-10, 10, w + 8, h - 41, 5,5);//10 * 2, 10 * 2); letsgoING
             g.setColor(this.getBackground());
             g.drawLine(-10, 10, w - 11, 10);
             g.setColor(new Color(255, 255, 255, 80));

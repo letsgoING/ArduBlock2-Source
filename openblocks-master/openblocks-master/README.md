@@ -54,4 +54,7 @@ changes:
 other changes:
 - in mouseReleased() added clone functionality by rightClick + CTRL (RenderableBlock.java line 1917 - 1921)
 - in Page() removed "add collapse Button" (Page.java line 176)
-- in paintComponent() removed "paint label" (Page.java line 1150 - 1166) 
+- in paintComponent() removed "paint label" (Page.java line 1150 - 1166)
+for zoom:
+- added setValue and getValue method in ZoomSlider class (ZoomSlider.java line 60 - 70)
+- changed calculation for unzoomed block-position in setWorkspaceZoom() (Workspace.java line 550 - 561)

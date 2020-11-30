@@ -165,12 +165,26 @@ public class Context
 		Page page = workspace.getPageNamed("Main");
 		
 		FactoryManager manager = workspace.getFactoryManager();
-		Block newBlock;
-        newBlock = new Block(workspace, "loop", false);
-        FactoryRenderableBlock factoryRenderableBlock = new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID());
+		//removed by letsgoING:
+		//Block newBlock;
+        //newBlock = new Block(workspace, "loop", false);
+		//FactoryRenderableBlock factoryRenderableBlock = new FactoryRenderableBlock(workspace, manager, loopBlock.getBlockID());
+        //RenderableBlock renderableBlock = factoryRenderableBlock.createNewInstance();
+        //renderableBlock.setLocation(100, 100);
+        //page.addBlock(renderableBlock);
+        
+		//added by letsgoING:			
+	 	Block loopBlock = new Block(workspace, "loop", false);
+        FactoryRenderableBlock factoryRenderableBlock = new FactoryRenderableBlock(workspace, manager, loopBlock.getBlockID());
         RenderableBlock renderableBlock = factoryRenderableBlock.createNewInstance();
-        renderableBlock.setLocation(100, 100);
+        renderableBlock.setLocation(20, 250);
         page.addBlock(renderableBlock);
+        
+        Block commentBlock = new Block(workspace, "program_comment", false);
+        FactoryRenderableBlock factoryRenderableBlock2 = new FactoryRenderableBlock(workspace, manager, commentBlock.getBlockID());
+        RenderableBlock renderableBlock2 = factoryRenderableBlock2.createNewInstance();
+        renderableBlock2.setLocation(20, 20);
+        page.addBlock(renderableBlock2);
 
 	}
 	
@@ -255,6 +269,7 @@ public class Context
 		{
 			saveFile.createNewFile();
 		}
+		//TODO: change to Unicode?!?
 		FileOutputStream fos = new FileOutputStream(saveFile, false);
 		fos.write(saveString.getBytes("UTF8"));
 		fos.flush();

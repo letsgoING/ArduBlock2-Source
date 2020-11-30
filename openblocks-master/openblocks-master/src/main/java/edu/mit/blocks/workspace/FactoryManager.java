@@ -115,7 +115,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     public FactoryManager(Workspace workspace) {
         this.workspace = workspace;
         this.navigator = new Navigator(workspace);
-        this.navigator.getJComponent().setPreferredSize(new Dimension(160, 600));
+        this.navigator.getJComponent().setPreferredSize(new Dimension(220, 800)); //changed from 160 by letsgoING
         this.navigator.addExlorer(STATIC_NAME);
         this.navigator.addExlorer(DYNAMIC_NAME);
         this.navigator.addExlorer(SUBSETS_NAME);
@@ -590,7 +590,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * @return all blocks in all drawers.  If no blocks found, return
-     * 			an empty set.  Ifno drawers exists in either factories,
+     * 			an empty set.  If no drawers exists in either factories,
      * 			return an empty set.
      */
     public Collection<RenderableBlock> getBlocks() {
@@ -620,6 +620,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
                     canvas.addBlock(block);
                     workspace.notifyListeners(new WorkspaceEvent(workspace, this, block.getBlockID(), WorkspaceEvent.BLOCK_ADDED));
                     canvas.layoutBlocks();
+System.out.println(canvas);
                     return;
                 }
             }

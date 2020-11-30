@@ -173,7 +173,7 @@ public class BlockShapeUtil {
         //System.out.println("Not found cached bevel!");
         //generic light vector - "chosen to look good"
         float[] light = ShapeBevel.getLightVector(-1, -2, 2);
-        int bevelSize = 3;
+        int bevelSize = 1;//3;
         //create image
         img = GraphicsManager.gc.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
         Graphics2D g2 = (Graphics2D) img.getGraphics();

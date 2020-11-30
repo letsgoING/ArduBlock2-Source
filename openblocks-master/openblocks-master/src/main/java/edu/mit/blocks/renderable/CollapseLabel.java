@@ -32,7 +32,7 @@ class CollapseLabel extends BlockControlLabel {
         if (rb != null) {
             int x = 0;
             int y = 0;
-
+            
             y += rb.getBlockHeight() / rb.getZoom() - 22 + (isActive() ? BlockConnectorShape.CONTROL_PLUG_HEIGHT : 0);
             x += 12;
             x = rb.rescale(x);

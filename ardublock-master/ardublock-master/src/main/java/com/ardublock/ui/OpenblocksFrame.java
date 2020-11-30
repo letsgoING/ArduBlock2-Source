@@ -40,10 +40,8 @@ import com.ardublock.ui.listener.SaveImageButtonListener;
 //import com.ardublock.ui.listener.ZoomOutButtonListener;
 //import com.ardublock.ui.listener.ZoomResetButtonListener;
 
-
-
-
 import edu.mit.blocks.controller.WorkspaceController;
+import edu.mit.blocks.workspace.TrashCan;
 import edu.mit.blocks.workspace.Workspace;
 import edu.mit.blocks.workspace.ZoomSlider;
 
@@ -82,7 +80,7 @@ public class OpenblocksFrame extends JFrame
 	{
 		context = Context.getContext();
 		this.setTitle(makeFrameTitle());
-		this.setSize(new Dimension(1024, 760));
+		this.setSize(new Dimension(1200, 800));
 		this.setLayout(new BorderLayout());
 		//put the frame to the center of screen
 		this.setLocationRelativeTo(null);
@@ -253,14 +251,25 @@ public class OpenblocksFrame extends JFrame
 		zoomResetButton.setToolTipText(uiMessageBundle.getString("ardublock.ui.zoomReset.tooltip"));
 		*/
 		//*****************************************	
-	
+
+		//TODO: add to an place
+		TrashCan myTrashCan = new TrashCan(workspace, getToolkit().getImage("src/main/resources/com/ardublock/block/trash.png"), getToolkit().getImage("src/main/resources/com/ardublock/block/trash_open.png"));
+		//bottomPanel.add(myTrashCan);
+		
+		
 		//SWITCH BLOCK MENU EXPERT/STANDARD 
 		//*****************************************
 		JButton modeButton = new JButton(uiMessageBundle.getString("ardublock.ui.modeButton.mode.expert"));
 		ActionListener modeButtonListener = new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
-			    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			//TODO: check if Desktop is not necessary on all plattforms
+			   // Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+			   // if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+				
+				//TODO: check if zoom handling is possible in WorkspacecController
+				//get current zoomLevel
+				int currentWorkspaceZoom = zoomSlider.getValue();
+				
 			        try {
 			        	WorkspaceController workspaceController = context.getWorkspaceController();
 				        if(!workspaceModeState){
@@ -272,12 +281,13 @@ public class OpenblocksFrame extends JFrame
 				        	modeButton.setText(uiMessageBundle.getString("ardublock.ui.modeButton.mode.expert"));
 				        }
 				        zoomSlider.reset();
+				        zoomSlider.setValue(currentWorkspaceZoom);
 				        workspaceModeState=!workspaceModeState;
 				        
 			        } catch (Exception e1) {
 			            //e1.printStackTrace();
 			        }
-			    }
+			   //}
 			}
 		};
 		modeButton.addActionListener(modeButtonListener);
@@ -373,7 +383,13 @@ public class OpenblocksFrame extends JFrame
 	}
 	
 	private void loadFile()
-	{
+	{	
+		//get current workspace-zoomLevel
+		//TODO: get Page non static
+		//TODO: check if zoom handling is possible in WorkspacecController
+		@SuppressWarnings("static-access")
+		double currentWorkspaceZoom = context.getWorkspace().getPageNamed("Main").getZoomLevel();
+		
 		int result = fileChooser.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION)
 		{
@@ -401,7 +417,6 @@ public class OpenblocksFrame extends JFrame
 			}
 		}
 		
-		//set Menu Mode letsgoING
 		try {
 	        if(workspaceModeState){
 	        	context.getWorkspaceController().loadProject(getArduBlockString(), null , "custom");	
@@ -410,6 +425,8 @@ public class OpenblocksFrame extends JFrame
             //e1.printStackTrace();
         }
 		
+		//Set workspace to current zoomLevel
+		context.getWorkspace().setWorkspaceZoom(currentWorkspaceZoom);
 	}
 	
 	public void doSaveArduBlockFile()
@@ -509,6 +526,12 @@ public class OpenblocksFrame extends JFrame
 	
 	public void doNewArduBlockFile()
 	{
+		//get current workspace-zoomLevel
+		//TODO: get Page non static
+		//TODO: check if zoom handling is possible in WorkspacecController
+		@SuppressWarnings("static-access")
+		double currentWorkspaceZoom = context.getWorkspace().getPageNamed("Main").getZoomLevel();
+		
 		if (context.isWorkspaceChanged())
 		{
 			int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.question.newfile_on_workspace_changed"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
@@ -527,10 +550,13 @@ public class OpenblocksFrame extends JFrame
 		try {
 		  if(workspaceModeState){
 			  context.getWorkspaceController().loadProject(getArduBlockString(), null , "custom");	 
+			  
 		  }
 		} catch (Exception e1) {
 			//e1.printStackTrace();
 		}
+		//Set workspace to current zoomLevel
+		context.getWorkspace().setWorkspaceZoom(currentWorkspaceZoom);
 
 	}
 	

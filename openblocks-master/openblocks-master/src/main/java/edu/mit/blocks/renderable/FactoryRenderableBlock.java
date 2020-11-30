@@ -112,6 +112,5 @@ public class FactoryRenderableBlock extends RenderableBlock {
     public void stopDragging(MouseEvent e, WorkspaceWidget w) {
     }
 
-    public void setZoomLevel(double newZoom) {
-    }
+   // public void setZoomLevel(double newZoom) {    } //letsgoING - zoomable blocks in menue
 }

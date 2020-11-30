@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import javax.swing.JComponent;
 
+import edu.mit.blocks.codeblocks.JComponentDragHandler;
 import edu.mit.blocks.renderable.BlockUtilities;
 import edu.mit.blocks.renderable.RenderableBlock;
 
@@ -60,7 +61,7 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
         workspace.addComponentListener(this);
 
         //to make draggable, uncomment
-        //JComponentDragHandler dragHandler = new JComponentDragHandler(this);
+        //JComponentDragHandler dragHandler = new JComponentDragHandler(workspace, this);
         //addMouseListener(dragHandler);
         //addMouseMotionListener(dragHandler);
     }
