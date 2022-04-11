@@ -2,6 +2,8 @@
 
 Source-Code for ArduBlock V2 for letsgoING Project.
 
+ACHTUNG: Alle neuen Versionen von ArduBlock werden auf unserem Gitlab-Server gehostet: https://gitlab.reutlingen-university.de/letsgoing
+
 ## Setting up Eclipse ##
 1. Download the files
 2. Start Eclipe and select workspace
